@@ -112,11 +112,11 @@ data "aws_iam_policy_document" "deployment" {
 }
 
 resource "aws_iam_user" "deployment" {
-  name = "${var.service}-${terraform.env}-deployment"
+  name = "${var.service}.${terraform.env}.deployment"
 }
 
 resource "aws_iam_policy" "deployment" {
-  name   = "${var.service}-${terraform.env}-deployment-access-policy"
+  name   = "${var.service}.${terraform.env}.deployment.access-policy"
   policy = "${data.aws_iam_policy_document.deployment.json}"
 }
 

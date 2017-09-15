@@ -10,9 +10,9 @@ read -p "Environment variable value: " \
 
 printf "\r" >&2
 
-aws kms encrypt --key-id "alias/sms-to-email-$1-env-vars" \
+aws kms encrypt --key-id "alias/forward-$1-env-vars" \
                 --plaintext "$plaintext" \
-                --profile sms-to-email-infrastructure \
+                --profile forward.infrastructure \
                 --region eu-west-1 \
                 --query CiphertextBlob \
                 --output text

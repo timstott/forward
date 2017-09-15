@@ -1,4 +1,4 @@
-service: sms-to-email
+service: forward
 
 frameworkVersion: "=1.19"
 
@@ -6,20 +6,20 @@ provider:
   name: aws
   runtime: nodejs6.10
   region: eu-west-1
-  role: arn:aws:iam::860963740950:role/${self:service}-${opt:stage}-runtime
+  role: arn:aws:iam::860963740950:role/${self:service}.${opt:stage}.runtime
   environment: ${file(envs.yml):${opt:stage}}
   stackTags:
-    project: sms-to-email
+    project: forward
     stage: ${opt:stage}
   deploymentBucket:
-    name: ${self:service}-${opt:stage}-deployments
+    name: ${self:service}.${opt:stage}.deployments
 
 functions:
-  startEarning:
+  twilio:
     handler: dist/handlers.twilioSmsToEmailHandler
     timeout: 60
     memorySize: 128
     events:
       - http:
-          path: sms
+          path: twilio
           method: post

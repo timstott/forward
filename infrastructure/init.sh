@@ -1,11 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
-export AWS_DEFAULT_PROFILE=sms-to-email-infrastructure
+export AWS_DEFAULT_PROFILE=forward.infrastructure
 
 cd "$(dirname "$BASH_SOURCE")"
 
-bucket=sms-to-email-terraform-state
+bucket=forward.terraform.state
 
 if (aws s3api head-bucket --bucket $bucket 2>&1 || true) | grep --quiet 404; then
   echo "Creating S3 bucket to store state"

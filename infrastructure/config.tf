@@ -5,19 +5,19 @@ variable "region" {
 
 variable "service" {
   description = "Name of the Serverless service being deployed"
-  default     = "sms-to-email"
+  default     = "forward"
 }
 
 terraform {
   backend "s3" {
-    bucket  = "sms-to-email-terraform-state"
+    bucket  = "forward.terraform.state"
     key     = "terraform.tfstate"
-    profile = "sms-to-email-infrastructure"
+    profile = "forward.infrastructure"
     region  = "eu-west-1"
   }
 }
 
 provider "aws" {
-  profile = "sms-to-email-infrastructure"
+  profile = "forward.infrastructure"
   region  = "${var.region}"
 }

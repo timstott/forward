@@ -1,4 +1,4 @@
-# SMS to Email
+# Forward
 
 Forwards SMS to email with optional PGP encryption.
 
@@ -21,5 +21,5 @@ yarn install
 Make sure the infrastructure has been provisioned see [documentation](./infrastructure/README.md)
 
 ```console
-npm-exec serverless --aws-profile sms-to-email-dev-deployment --stage dev deploy
+npm-exec serverless --aws-profile forward.dev.deployment --stage dev deploy
 ```

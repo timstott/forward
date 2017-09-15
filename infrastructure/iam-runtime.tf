@@ -21,7 +21,7 @@ data "aws_iam_policy_document" "runtime" {
 }
 
 resource "aws_iam_policy" "runtime" {
-  name   = "${var.service}-${terraform.env}-runtime-access-policy"
+  name   = "${var.service}.${terraform.env}.runtime.access-policy"
   policy = "${data.aws_iam_policy_document.runtime.json}"
 }
 
@@ -39,7 +39,7 @@ data "aws_iam_policy_document" "assume_runtime_role" {
 }
 
 resource "aws_iam_role" "runtime" {
-  name               = "${var.service}-${terraform.env}-runtime"
+  name               = "${var.service}.${terraform.env}.runtime"
   assume_role_policy = "${data.aws_iam_policy_document.assume_runtime_role.json}"
 }
 

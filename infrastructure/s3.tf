@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "deployment" {
-  bucket = "${var.service}-${terraform.env}-deployments"
+  bucket = "${var.service}.${terraform.env}.deployments"
 
   tags {
     stage   = "${terraform.env}"
