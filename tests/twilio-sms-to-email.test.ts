@@ -7,10 +7,11 @@ jest.mock("../src/rollbar", () => ({
 describe('twiolioSmsToEmai', () => {
   it('responds with empty SMS response', async () => {
     const request = {
-      body: JSON.stringify({name: "Alice"})
-
+      body: JSON.stringify({name: "Alice"}),
+      pathParameters: null,
+      queryStringParameters: null,
     }
-    const { body, statusCode } = await twilioSmsToEmail(request, {})
+    const { body, statusCode } = await twilioSmsToEmail(request)
 
     expect(statusCode).toEqual(201);
   });

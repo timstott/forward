@@ -1,7 +1,8 @@
-import { APIGatewayEvent, Context, ProxyResult } from "aws-lambda";
+import { Context, ProxyResult } from "aws-lambda";
 import { initializeRollbar } from "./rollbar";
+import { ITinyAPIEvent } from "./types";
 
-const twilioSmsToEmail = async (event: APIGatewayEvent, _context: Context): Promise<ProxyResult> => {
+const twilioSmsToEmail = async (event: ITinyAPIEvent, _context?: Context): Promise<ProxyResult> => {
   await initializeRollbar();
   const data = JSON.parse(event.body);
 
