@@ -4,10 +4,13 @@ import { ITinyAPIEvent } from "./types";
 
 const twilioSmsToEmail = async (event: ITinyAPIEvent, _context?: Context): Promise<ProxyResult> => {
   await initializeRollbar();
-  const data = JSON.parse(event.body);
+  JSON.parse(event.body);
 
   return {
-    body: JSON.stringify(data),
+    body: '<?xml version="1.0" encoding="UTF-8" ?><Response></Response>',
+    headers: {
+      "Content-Type": "application/xml",
+    },
     statusCode: 201,
   };
 };
