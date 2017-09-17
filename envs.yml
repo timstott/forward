@@ -6,10 +6,12 @@ dev:
   NODE_ENV: dev
   DEBUG: "Rollbar:*"
   LOG_LEVEL: silly
+  SOURCE_ADDRESS: noreply@dev.forward.predicate.xyz
   ROLLBAR_TOKEN: AQICAHigqf45QzalkHPAN7wOYkQ+Z0l/emSu7d5hbDosrg6jygEsAzS06bOE55l4m75CeH1gAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQM3GOxBirdUPLA4N6RAgEQgDuHvQ0j+g8at/PhYWGcZViPxkx07AUTBtWY1rxwjCp/rh3WrERzoTbOXJgW1shb+W+WsE6DF2NqH818hg==
 
 production:
   <<: *common
   NODE_ENV: production
   LOG_LEVEL: warn
+  SOURCE_ADDRESS: noreply@forward.predicate.xyz
   ROLLBAR_TOKEN: AQICAHgqUfjNtpi2i7BFw3IoJViQ46G0ErFiXARxgpJdsXiRegHvQ4iX64yVcwWMrr3WlpYGAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMCgtVcuqR3xUtvoYIAgEQgDsOCyzfq9YESbEx6SJlNGRQHid+QP4DoMPcluo2+rzGeTKLRnM5a4bzs9HmHc+EwBX+QBSPwW8BGEUMaA==

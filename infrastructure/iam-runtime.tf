@@ -18,6 +18,16 @@ data "aws_iam_policy_document" "runtime" {
       "${aws_kms_key.env_vars.arn}",
     ]
   }
+
+  statement {
+    actions = [
+      "ses:SendEmail",
+    ]
+
+    resources = [
+      "*",
+    ]
+  }
 }
 
 resource "aws_iam_policy" "runtime" {

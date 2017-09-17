@@ -1,10 +1,24 @@
 import { Context, ProxyResult } from "aws-lambda";
+import { get } from "lodash";
+import * as qs from "querystring";
 import { initializeRollbar } from "./rollbar";
-import { ITinyAPIEvent } from "./types";
+import { sendEmail } from "./ses";
+import { ITinyAPIEvent, ITwilioPayload } from "./types";
 
 const twilioSmsToEmail = async (event: ITinyAPIEvent, _context?: Context): Promise<ProxyResult> => {
   await initializeRollbar();
-  JSON.parse(event.body);
+  const sourceAddress = process.env.SOURCE_ADDRESS;
+  const payload = qs.parse(event.body) as ITwilioPayload;
+  const content = payload.Body;
+  const subject = `Inboud message from ${payload.From}`;
+  const toAddress = String(get(event, "queryStringParameters.toAddress"));
+
+  await sendEmail({
+    body: content,
+    source: sourceAddress,
+    subject,
+    toAddress,
+  });
 
   return {
     body: '<?xml version="1.0" encoding="UTF-8" ?><Response></Response>',
