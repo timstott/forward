@@ -34,7 +34,8 @@
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/**.ts"
+      "src/**.ts",
+      "!src/types.ts"
     ],
     "moduleFileExtensions": [
       "ts",
