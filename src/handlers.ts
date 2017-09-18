@@ -1,6 +1,6 @@
-import { asyncHandlerWrapper } from "./async-handler-wrapper";
+import { asyncHandler } from "./async-handler";
 import { twilioSmsToEmail } from "./twilio-sms-to-email";
 
-const twilioSmsToEmailHandler = asyncHandlerWrapper(twilioSmsToEmail);
+const twilioSmsToEmailHandler = asyncHandler(twilioSmsToEmail);
 
 export { twilioSmsToEmailHandler };
