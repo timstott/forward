@@ -2689,8 +2689,8 @@ rimraf@^2.2.8, rimraf@^2.6.1:
     glob "^7.0.5"
 
 "rollbar@https://github.com/rollbar/rollbar.js.git#master":
-  version "2.1.3"
-  resolved "https://github.com/rollbar/rollbar.js.git#72fb91c7d1b7695ded446b1e9b31776ffad12732"
+  version "2.2.8"
+  resolved "https://github.com/rollbar/rollbar.js.git#8f27db99c0975340b63b15fbb50d0beb5d6a6498"
   dependencies:
     async "~1.2.1"
     console-polyfill "0.3.0"

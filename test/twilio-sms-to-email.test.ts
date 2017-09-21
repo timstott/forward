@@ -4,9 +4,6 @@ import { twilioSmsToEmail } from "../src/twilio-sms-to-email";
 
 const twiolioPayload = readFileSync("./test/fixtures/twilio-on-message-payload.txt", "UTF-8");
 
-jest.mock("../src/rollbar", () => ({
-  initializeRollbar: () => ({}),
-}));
 jest.mock("../src/ses");
 
 describe("twiolioSmsToEmail", () => {
