@@ -38,3 +38,13 @@ aws configure --profile forward.dev.deployment
 Remove admin access to `forward.infrastructure` user.
 
 You are now ready to deploy 🎉!
+
+# UnTerraformed Infrastructure
+
+The following bits of infrastructure require manual setup:
+
+- Route 53 Zone creation
+- AWS ACM SSL certificate verification
+- SES domain name verification
+- SES email address verification
+- API Gateway Custom Domain Name creation

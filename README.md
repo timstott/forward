@@ -1,12 +1,18 @@
 # Forward
 
-Forwards SMS to email with optional PGP encryption.
+Forwards SMS to email.
 
-Why? This project is the child of frustrations with a foreign bank.
+Why? Because a Swiss bank won't text OTP codes to non-Swiss mobile numbers.
 
-To complete online transactions an OTP is sent over SMS or can be computed
-with a device issued by the bank. However SMS can only be sent to local numbers
-and taking the device everywhere with you is impractical.
+To complete online transactions an OTP is sent over SMS or can
+be computed with a device issued by the bank. These devices are often
+inconvenient to carry and mobile numbers are country restricted.
+
+Behold Twilio! We can create a number in the bank's country and
+have all messages forwarded to us via email.
+
+This project attempts to solve this challenge while keeping operational costs
+to a minimum.
 
 ## Setup
 
