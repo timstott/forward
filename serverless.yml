@@ -1,6 +1,6 @@
 service: forward
 
-frameworkVersion: "=1.19"
+frameworkVersion: "=1.23"
 
 provider:
   name: aws
@@ -14,9 +14,12 @@ provider:
   deploymentBucket:
     name: ${self:service}.${opt:stage}.deployments
 
+plugins:
+  - serverless-webpack
+
 functions:
   twilio:
-    handler: dist/handlers.twilioSmsToEmailHandler
+    handler: src/handlers.twilioSmsToEmailHandler
     timeout: 60
     memorySize: 128
     events:
