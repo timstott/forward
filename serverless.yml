@@ -8,6 +8,7 @@ provider:
   region: eu-west-1
   role: arn:aws:iam::860963740950:role/${self:service}.${opt:stage}.runtime
   environment: ${file(envs.yml):${opt:stage}}
+  apiKeys: ${file(apikeys.yml):${opt:stage}}
   stackTags:
     project: forward
     stage: ${opt:stage}
