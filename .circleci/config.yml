@@ -9,10 +9,10 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: yarnlock-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: yarnlock-{{ checksum "yarn.lock" }}
       - run: yarn install --pure-lockfile
       - save_cache:
-          key: yarnlock-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: yarnlock-{{ checksum "yarn.lock" }}
           paths:
             - "node_modules"
       - run: yarn lint
