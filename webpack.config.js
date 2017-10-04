@@ -4,6 +4,9 @@ const slsw = require('serverless-webpack');
 module.exports = {
   entry: slsw.lib.entries,
   resolve: {
+    alias: {
+      rollbar: 'rollbar/dist/rollbar.min.js'
+    },
     extensions: [
       '.js',
       '.json',
