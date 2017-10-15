@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  test:
     working_directory: ~/source
     docker:
       - image: circleci/node:6.10.3
@@ -9,12 +9,36 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: yarnlock-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - run: yarn install --pure-lockfile
+          key: yarnlock-{{ checksum "yarn.lock" }}
+      - run: yarn check || yarn install --pure-lockfile
       - save_cache:
-          key: yarnlock-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: yarnlock-{{ checksum "yarn.lock" }}
           paths:
             - "node_modules"
       - run: yarn lint
       - run: yarn build
       - run: yarn test
+
+  deploy:
+    working_directory: ~/source
+    docker:
+      - image: circleci/node:6.10.3
+    environment:
+      - NODE_ENV: test
+    steps:
+      - checkout
+      - restore_cache:
+          key: yarnlock-{{ checksum "yarn.lock" }}
+      - run: yarn deploy
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - test
+      - deploy:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
