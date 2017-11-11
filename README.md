@@ -21,6 +21,7 @@ brew install awscli
 brew install terraform
 
 yarn install
+yarn test
 ```
 
 ## Deployment
