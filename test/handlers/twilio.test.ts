@@ -1,12 +1,12 @@
 import { readFileSync } from "fs";
-import { sendEmail } from "../src/ses";
-import { twilioSmsToEmail } from "../src/twilio-sms-to-email";
+import { sendEmail } from "../../src/ses";
+import { twilio as handler } from "../../src/handlers/twilio";
 
 const twiolioPayload = readFileSync("./test/fixtures/twilio-on-message-payload.txt", "UTF-8");
 
-jest.mock("../src/ses");
+jest.mock("../../src/ses");
 
-describe("twiolioSmsToEmail", () => {
+describe("twilio handler", () => {
   beforeEach(() => (sendEmail as any).mockClear());
 
   it("responds with empty SMS response", async () => {
@@ -15,7 +15,7 @@ describe("twiolioSmsToEmail", () => {
       pathParameters: null,
       queryStringParameters: null,
     };
-    const { body, headers, statusCode } = await twilioSmsToEmail(request);
+    const { body, headers, statusCode } = await handler(request);
 
     expect(body).toEqual('<?xml version="1.0" encoding="UTF-8" ?><Response></Response>');
     expect(headers).toHaveProperty("Content-Type", "application/xml");
@@ -31,7 +31,7 @@ describe("twiolioSmsToEmail", () => {
       queryStringParameters: { toAddress: "hello@example.com" },
     };
 
-    await twilioSmsToEmail(request);
+    await handler(request);
 
     expect(sendEmail).toBeCalledWith({
         body: "Alice",

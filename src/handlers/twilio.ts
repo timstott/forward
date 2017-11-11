@@ -1,15 +1,14 @@
 import { Context, ProxyResult } from "aws-lambda";
 import { get } from "lodash";
 import * as qs from "querystring";
-import { sendEmail } from "./ses";
-import { ITinyAPIEvent } from "./types";
+import { sendEmail } from "../ses";
 
 const decodePayload = (input: any) => ({
   Body: input.Body,
   From: input.From,
 });
 
-const twilioSmsToEmail = async (event: ITinyAPIEvent, _context?: Context): Promise<ProxyResult> => {
+const twilio = async (event: any, _context?: Context): Promise<ProxyResult> => {
   const sourceAddress = process.env.SOURCE_ADDRESS;
   const payload = decodePayload(qs.parse(event.body));
   const content = payload.Body;
@@ -32,4 +31,4 @@ const twilioSmsToEmail = async (event: ITinyAPIEvent, _context?: Context): Promi
   };
 };
 
-export { twilioSmsToEmail };
+export { twilio };

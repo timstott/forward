@@ -1,5 +1,5 @@
 import * as Rollbar from "rollbar";
-import { decryptEnv } from "./kms";
+import { decryptEnv } from "../kms";
 
 type NODE_ENV_TYPE = "dev" | "test" | "production";
 const NODE_ENV = process.env.NODE_ENV as NODE_ENV_TYPE;
@@ -24,4 +24,4 @@ const errorHandler = (handler: any) => (
   }
 );
 
-export { initializeRollbar, errorHandler };
+export { errorHandler };

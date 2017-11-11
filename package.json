@@ -30,7 +30,7 @@
     "webpack": "^3.0.0"
   },
   "scripts": {
-    "lint": "tslint src/**.ts test/**.ts",
+    "lint": "tslint src/**/*.ts test/**/*.ts",
     "build": "serverless webpack --stage production",
     "test": "jest",
     "deploy": "serverless deploy --stage production --conceal"

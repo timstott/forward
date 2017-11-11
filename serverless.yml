@@ -20,7 +20,7 @@ plugins:
 
 functions:
   twilio:
-    handler: src/handlers.twilioSmsToEmailHandler
+    handler: src/handlers/index.twilio
     timeout: 60
     memorySize: 128
     events:
