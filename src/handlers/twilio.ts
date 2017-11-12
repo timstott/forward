@@ -1,25 +1,15 @@
 import { Context, ProxyResult } from "aws-lambda";
 import { get } from "lodash";
-import * as qs from "querystring";
-import { sendEmail } from "../ses";
-
-const decodePayload = (input: any) => ({
-  Body: input.Body,
-  From: input.From,
-});
+import { decodeTwilioPayload, sendTwilioEmail } from "../services";
 
 const twilio = async (event: any, _context?: Context): Promise<ProxyResult> => {
-  const sourceAddress = process.env.SOURCE_ADDRESS;
-  const payload = decodePayload(qs.parse(event.body));
-  const content = payload.Body;
-  const subject = `Inboud message from ${payload.From}`;
-  const toAddress = String(get(event, "queryStringParameters.toAddress"));
+  const destinationAddress = get(event, "queryStringParameters.toAddress");
+  const { content, originNumber } = decodeTwilioPayload(event.body);
 
-  await sendEmail({
-    body: content,
-    source: sourceAddress,
-    subject,
-    toAddress,
+  await sendTwilioEmail({
+    content,
+    destinationAddress,
+    originNumber,
   });
 
   return {
