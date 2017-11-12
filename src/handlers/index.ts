@@ -1,4 +1,4 @@
-import { asyncHandler, errorHandler } from "../middleware";
+import { asyncHandler } from "../middleware";
 import { twilio as twilioHandler } from "./twilio";
 
-export const twilio = errorHandler(asyncHandler(twilioHandler));
+export const twilio = asyncHandler(twilioHandler);
