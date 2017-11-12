@@ -4,7 +4,7 @@
   "license": "MIT",
   "dependencies": {
     "lodash": "^4.17.4",
-    "rollbar": "https://github.com/rollbar/rollbar.js.git#master",
+    "rollbar": "^2.3.1",
     "tslib": "^1.7.1",
     "winston": "^2.3.1"
   },
@@ -21,7 +21,7 @@
     "@types/winston": "^2.3.4",
     "aws-sdk": "^2.94.0",
     "jest": "^20.0.4",
-    "serverless": "https://github.com/timstott/serverless.git#conceal-api-keys",
+    "serverless": "^1.24.0",
     "serverless-webpack": "^3.1.0",
     "ts-jest": "^20.0.10",
     "ts-loader": "^2.3.7",
