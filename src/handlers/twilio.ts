@@ -1,10 +1,10 @@
-import { Context, ProxyResult } from "aws-lambda";
 import { get } from "lodash";
+import { IHTTPHandlerRequest, IHTTPHandlerResponse } from "../middleware";
 import { decodeTwilioPayload, sendTwilioEmail } from "../services";
 
-const twilio = async (event: any, _context?: Context): Promise<ProxyResult> => {
-  const destinationAddress = get(event, "queryStringParameters.toAddress");
-  const { content, originNumber } = decodeTwilioPayload(event.body);
+const twilio = async ({ body, params }: IHTTPHandlerRequest): Promise<IHTTPHandlerResponse> => {
+  const destinationAddress = get(params, "toAddress");
+  const { content, originNumber } = decodeTwilioPayload(body);
 
   await sendTwilioEmail({
     content,
@@ -17,7 +17,7 @@ const twilio = async (event: any, _context?: Context): Promise<ProxyResult> => {
     headers: {
       "Content-Type": "application/xml",
     },
-    statusCode: 201,
+    status: 201,
   };
 };
 

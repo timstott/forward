@@ -12,14 +12,13 @@ describe("twilio handler", () => {
 
     const event = {
       body: "body",
-      pathParameters: null,
-      queryStringParameters: null,
+      params: {},
     };
-    const { body, headers, statusCode } = await handler(event);
+    const { body, headers, status } = await handler(event);
 
     expect(body).toEqual('<?xml version="1.0" encoding="UTF-8" ?><Response></Response>');
     expect(headers).toHaveProperty("Content-Type", "application/xml");
-    expect(statusCode).toEqual(201);
+    expect(status).toEqual(201);
 
     expect(decodeTwilioPayload).toHaveBeenCalledWith("body");
   });
@@ -29,8 +28,7 @@ describe("twilio handler", () => {
     (sendTwilioEmail as any).mockReturnValue(Promise.resolve());
     const request = {
       body: "",
-      pathParameters: null,
-      queryStringParameters: { toAddress: "hello@example.com" },
+      params: { toAddress: "hello@example.com" },
     };
 
     await handler(request);
