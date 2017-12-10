@@ -4,14 +4,11 @@ common: &common
 dev:
   <<: *common
   NODE_ENV: dev
-  DEBUG: "Rollbar:*"
   LOG_LEVEL: silly
   SOURCE_ADDRESS: noreply@dev.forward.predicate.xyz
-  ROLLBAR_TOKEN: AQICAHjkeivY+UhdRbF7b3qFc0Qg6RY/810nNfxrNQGdzNVgLQGKYpbQA5kM5JxLiLy9eAisAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQM3RRdO+yTO3C1+V40AgEQgDvot5LcHnfa6deuE8KEgyua4OY7WDADn2ChBkyGyxv//h5v2offFlxfkXkJPKXf/o3uDHiLATCeuaFi3A==
 
 production:
   <<: *common
   NODE_ENV: production
   LOG_LEVEL: warn
   SOURCE_ADDRESS: noreply@forward.predicate.xyz
-

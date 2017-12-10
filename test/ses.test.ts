@@ -10,7 +10,7 @@ describe("sendEmail", () => {
 
     const result = await sendEmail({
       body: "Incredible",
-      source: "noreply@example.com",
+      sourceAddress: "noreply@example.com",
       subject: "Hello World",
       toAddress: "hello@example.com",
     });

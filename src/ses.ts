@@ -2,12 +2,12 @@ import { sesClient } from "./aws";
 
 interface ISendEmail {
   body: string;
-  source: string;
+  sourceAddress: string;
   subject: string;
   toAddress: string;
 }
 
-const sendEmail = async ({body, source, subject, toAddress}: ISendEmail) => {
+const sendEmail = async ({body, sourceAddress, subject, toAddress}: ISendEmail) => {
   const chartset = "UTF-8";
 
   const params = {
@@ -26,7 +26,7 @@ const sendEmail = async ({body, source, subject, toAddress}: ISendEmail) => {
         Data: subject,
       },
     },
-    Source: source,
+    Source: sourceAddress,
   };
 
   return sesClient.sendEmail(params).promise();

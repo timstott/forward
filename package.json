@@ -4,7 +4,6 @@
   "license": "MIT",
   "dependencies": {
     "lodash": "^4.17.4",
-    "rollbar": "^2.3.1",
     "tslib": "^1.7.1",
     "winston": "^2.3.1"
   },
@@ -30,7 +29,7 @@
     "webpack": "^3.0.0"
   },
   "scripts": {
-    "lint": "tslint src/**.ts test/**.ts",
+    "lint": "tslint src/**/*.ts test/**/*.ts",
     "build": "serverless webpack --stage production",
     "test": "jest",
     "deploy": "serverless deploy --stage production --conceal"
