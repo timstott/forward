@@ -1,6 +1,6 @@
 service: forward
 
-frameworkVersion: "=1.24.1"
+frameworkVersion: "~ 1.26.0"
 
 provider:
   name: aws
