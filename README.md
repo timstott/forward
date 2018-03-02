@@ -1,5 +1,10 @@
 # Forward
 
+[![CircleCI](https://img.shields.io/circleci/project/github/timstott/forward.svg?style=flat-square)](https://circleci.com/gh/timstott/forward/tree/master)
+[![GitHub Release](https://img.shields.io/github/release/timstott/forward.svg?style=flat-square)](https://github.com/timstott/forward/releases)
+
+## Description
+
 Forwards SMS to email.
 
 Why? Because a Swiss bank won't text OTP codes to non-Swiss mobile numbers.
