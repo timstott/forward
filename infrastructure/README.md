@@ -1,41 +1,35 @@
 ## Infrastructure
 
-Create the IAM user `forward.infrastructure` with programmatic access.
+Create the IAM user `forward-infrastructure` with programmatic access.
 Add admin privileges to the user to provision all resources
 (we will remove them at the end).
 
 ```console
-# Configure aws profile with user credentials
-aws configure --profile forward.infrastructure
-```
+# configure aws profile with the infrastructure user credentials
+aws configure --profile forward-infrastructure
 
-```console
-# Initilise infrastructure state bucket
+# initilise infrastructure state bucket
 ./init.sh
 ```
 
-```console
-# Create environment specific states
-terraform workspace new dev
-terraform workspace new production
-```
+To provision an environment cd into its specific directory
 
 ```console
-# Provision environment
-terraform workspace select dev
+cd development
+terraform init
 terraform plan
-terraform apply
 ```
 
-The changes will create a stage deployment user without access keys. They
-must be manually created from the AWS console.
+In addition to provisioning the environment a deployment user with deploy only
+access will be created. However you must manually created its access key from
+the AWS console.
 
 ```console
-# Configure aws profile with the deployment user access keys
-aws configure --profile forward.dev.deployment
+# configure aws profile with the deployment user access key
+aws configure --profile forward-dev-deployment
 ```
 
-Remove admin access to `forward.infrastructure` user.
+Remove admin access to `forward-infrastructure` user.
 
 You are now ready to deploy 🎉!
 
@@ -43,8 +37,4 @@ You are now ready to deploy 🎉!
 
 The following bits of infrastructure require manual setup:
 
-- Route 53 Zone creation
-- AWS ACM SSL certificate verification
-- SES domain name verification
 - SES email address verification
-- API Gateway Custom Domain Name creation

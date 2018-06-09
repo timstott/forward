@@ -1,29 +1,9 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-
-# Dependencies
-node_modules/
-
-# Coverage
-coverage
-
-# Transpiled files
 build/
 dist/
 tmp/
 
-# VS Code
-.vscode
-!.vscode/tasks.js
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-.serverless
-infrastructure/.terraform/
-infrastructure/terraform.tfstate.d/
+*.tfplan
+*.tfstate
+.terraform/
+terraform.tfstate*.backup
+terraform.tfstate.d/
