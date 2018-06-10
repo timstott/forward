@@ -1,5 +1,0 @@
-dev:
-  - dev-forward-owner
-
-production:
-  - production-forward-owner

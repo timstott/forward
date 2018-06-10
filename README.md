@@ -24,14 +24,7 @@ to a minimum.
 ```console
 brew install awscli
 brew install terraform
-
-yarn install
-yarn test
 ```
 
 ## Deployment
 Make sure the infrastructure has been provisioned see [documentation](./infrastructure/README.md)
-
-```console
-npm-exec serverless --aws-profile forward.dev.deployment --stage dev deploy
-```

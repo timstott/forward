@@ -1,1 +1,0 @@
-ToCountry=FR&ToState=&SmsMessageSid=SM8fa70ffb1ce14b25d0318f810296c91c&NumMedia=0&ToCity=&FromZip=&SmsSid=SM8fa70ffb1ce14b25d0318f810296c91c&FromState=&SmsStatus=received&FromCity=&Body=Alice&FromCountry=JE&To=%2B33111111111&ToZip=&NumSegments=1&MessageSid=SM8fa70ffb1ce14b25d0318f810296c91c&AccountSid=ACc4adeb5af6ffc6820ecdd2a2c6951f2b&From=%2B440000000000&ApiVersion=2010-04-01
