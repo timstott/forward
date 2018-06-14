@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -euo pipefail
+
+version=$(git describe --exact-match @ 2>/dev/null || git rev-parse --short @)
+
+build_output_dir='./dist'
+mkdir -p $build_output_dir
+
+GOOS=linux go build \
+  -o "$build_output_dir/main" \
+  -ldflags "-X github.com/timstott/forward/app.version=$version" \
+  lambda-server/main.go
+
+# temporarily cd tmpdir and zip
+(cd $build_output_dir && zip "v$version.zip" main 1>&2 > /dev/null)
+
+echo "$build_output_dir/v$version.zip"

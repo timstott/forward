@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Boot local dev server
+
+set -euo pipefail
+
+version=$(git describe --exact-match @ 2>/dev/null || git rev-parse --short @)
+
+export GIN_MODE=debug
+
+go run -ldflags "-X github.com/timstott/forward/app.version=$version" \
+  local-server/main.go

@@ -1,8 +1,6 @@
 resource "aws_lambda_function" "main" {
   function_name = "${var.service}-${var.environment}-application"
-
-  s3_bucket = "${var.service}-${var.environment}-deployments"
-  s3_key    = "latest.zip"
+  filename = "${path.module}/dummy.zip"
 
   handler = "main"
   runtime = "go1.x"
@@ -10,6 +8,12 @@ resource "aws_lambda_function" "main" {
   memory_size = 128
 
   role = "${aws_iam_role.runtime.arn}"
+
+  environment {
+    variables {
+      GIN_MODE = "release"
+    }
+  }
 }
 
 # allow lambda to access API Gateway

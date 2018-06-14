@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require 'logger'
+
+LOGGER = Logger.new(STDOUT)
+
+# parse options
+options = { environment: nil, zip_path: nil }
+option_parser = OptionParser.new do |opt|
+  opt.banner = 'Usage bin/deploy -e production -f ./dist/v1.zip'
+  opt.on('-e', '--environment env', String, 'Target environment') do |v|
+    options[:environment] = v
+  end
+  opt.on('-f', '--file file.zip', String, 'Zipped binary') do |v|
+    options[:zip_path] = v
+  end
+  opt.on('-h', '--help', 'Display usage') { puts opt; exit }
+end
+option_parser.parse!(ARGV)
+
+if options.values.any?(&:nil?)
+  puts option_parser.help
+  exit 1
+end
+
+environment             = options[:environment]
+absolute_zipe_file_path = File.expand_path(options[:zip_path])
+
+if !File.exist?(absolute_zipe_file_path)
+  LOGGER.error "Couldn't find file at the specified path: #{absolute_zipe_file_path}"
+  exit 1
+end
+# aws_profile = "forward-#{environment}-deploy"
+aws_profile   = "forward-#{environment}-deploy"
+function_mame = "forward-#{environment}-application"
+
+LOGGER.info "deploying #{File.basename(absolute_zipe_file_path)} to #{function_mame}"
+
+command_template = [
+  'env',
+  "aws --profile #{aws_profile} --region eu-west-1",
+  'lambda',
+  'update-function-code',
+  "--function-name #{function_mame}",
+  "--zip-file fileb://#{absolute_zipe_file_path}",
+]
+
+command = command_template.join(' ')
+LOGGER.debug command
+system(command)
+
+LOGGER.info 'deployed'

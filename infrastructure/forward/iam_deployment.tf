@@ -1,11 +1,11 @@
 data "aws_iam_policy_document" "deployment" {
   statement {
     actions = [
-      "s3:PutObject",
+      "lambda:UpdateFunctionCode",
     ]
 
     resources = [
-      "${aws_s3_bucket.deployment.arn}/*",
+      "${aws_lambda_function.main.arn}",
     ]
   }
 }
