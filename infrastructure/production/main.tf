@@ -3,7 +3,7 @@ terraform {
 
   backend "s3" {
     bucket  = "forward-terraform-state"
-    key     = "development.tfstate"
+    key     = "production.tfstate"
     encrypt = true
     profile = "forward.infrastructure"
     region  = "eu-west-1"
@@ -15,7 +15,7 @@ variable "destination_email" {}
 module "forward" {
   source = "../forward"
 
-  environment       = "development"
+  environment       = "production"
   destination_email = "${var.destination_email}"
 }
 

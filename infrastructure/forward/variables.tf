@@ -23,3 +23,7 @@ variable "service" {
 variable "environment" {
   description = "The environment to deploy to"
 }
+
+variable "destination_email" {
+  description = "The recipient email"
+}

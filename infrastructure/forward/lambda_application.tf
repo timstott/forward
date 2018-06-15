@@ -1,6 +1,6 @@
 resource "aws_lambda_function" "main" {
   function_name = "${var.service}-${var.environment}-application"
-  filename = "${path.module}/dummy.zip"
+  filename      = "${path.module}/dummy.zip"
 
   handler = "main"
   runtime = "go1.x"
@@ -11,7 +11,10 @@ resource "aws_lambda_function" "main" {
 
   environment {
     variables {
-      GIN_MODE = "release"
+      # Provide DESTINATION_EMAIL via TF_VAR_destination_email='a@b.c'
+      DESTINATION_EMAIL = "${var.destination_email}"
+      GIN_MODE          = "release"
+      SOURCE_EMAIL      = "noreply@${aws_acm_certificate.main.domain_name}"
     }
   }
 }

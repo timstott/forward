@@ -2,10 +2,6 @@ data "aws_route53_zone" "main" {
   name = "${var.hosted_zone}"
 }
 
-locals {
-  fqdn = "${var.environment}.${var.service}.${var.hosted_zone}"
-}
-
 resource "aws_route53_record" "main" {
   zone_id = "${data.aws_route53_zone.main.zone_id}"
   name    = "${aws_acm_certificate.main.domain_name}"
@@ -20,7 +16,7 @@ resource "aws_route53_record" "main" {
 
 # START Certificate
 resource "aws_acm_certificate" "main" {
-  domain_name       = "${local.fqdn}"
+  domain_name       = "${var.environment}.${var.service}.${var.hosted_zone}"
   validation_method = "DNS"
   provider          = "aws.acm"
 }
@@ -40,6 +36,6 @@ resource "aws_acm_certificate_validation" "main" {
 }
 
 resource "aws_api_gateway_domain_name" "main" {
-  domain_name     = "${local.fqdn}"
+  domain_name     = "${aws_acm_certificate.main.domain_name}"
   certificate_arn = "${aws_acm_certificate.main.arn}"
 }
