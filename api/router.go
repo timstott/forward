@@ -25,6 +25,7 @@ func noRouteHandler(c *gin.Context) {
 
 func Router(env Env) *gin.Engine {
 	router := gin.Default()
+	router.Use(requestLoggerHandler)
 	router.GET("/ping", pingHanlder)
 	router.GET("/version", versionHanlder(env))
 	router.POST("/nexmo/inbound", nexmoInboundSmsHandler(env))
