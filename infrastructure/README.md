@@ -1,13 +1,8 @@
 ## Infrastructure
 
-Create the IAM user `forward-infrastructure` with programmatic access.
-Add admin privileges to the user to provision all resources
-(we will remove them at the end).
+Create the IAM role `forward-infrastructure` with Administrator policy.
 
 ```console
-# configure aws profile with the infrastructure user credentials
-aws configure --profile forward-infrastructure
-
 # initilise infrastructure state bucket
 ./init.sh
 ```

@@ -30,15 +30,14 @@ if !File.exist?(absolute_zipe_file_path)
   LOGGER.error "Couldn't find file at the specified path: #{absolute_zipe_file_path}"
   exit 1
 end
-# aws_profile = "forward-#{environment}-deploy"
-aws_profile   = "forward-#{environment}-deploy"
+
 function_mame = "forward-#{environment}-application"
 
 LOGGER.info "deploying #{File.basename(absolute_zipe_file_path)} to #{function_mame}"
 
 command_template = [
   'env',
-  "aws --profile #{aws_profile} --region eu-west-1",
+  "aws",
   'lambda',
   'update-function-code',
   "--function-name #{function_mame}",

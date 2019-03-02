@@ -11,11 +11,17 @@ resource "aws_lambda_function" "main" {
 
   environment {
     variables {
-      # Provide DESTINATION_EMAIL via TF_VAR_destination_email='a@b.c'
       DESTINATION_EMAIL = "${var.destination_email}"
       GIN_MODE          = "release"
       SOURCE_EMAIL      = "noreply@${aws_acm_certificate.main.domain_name}"
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      "filename",
+      "last_modified",
+    ]
   }
 }
 

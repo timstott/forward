@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Usage:
+# bin/terraform production plan
+
+set -euo pipefail
+
+environment=$1
+shift 1
+
+cd "infrastructure/${environment}"
+
+set -x
+terraform $@

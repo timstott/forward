@@ -1,22 +1,27 @@
-terraform {
-  required_version = "0.11.7"
-
-  backend "s3" {
-    bucket  = "forward-terraform-state"
-    key     = "production.tfstate"
-    encrypt = true
-    profile = "forward.infrastructure"
-    region  = "eu-west-1"
-  }
+locals {
+  environment = "production"
 }
 
-variable "destination_email" {}
+resource "aws_ssm_parameter" "destination_email" {
+  name  = "/forward/${local.environment}/destination-email"
+  type  = "String"
+  value = "example.com"
+
+  lifecycle {
+    ignore_changes = ["value"]
+  }
+}
 
 module "forward" {
   source = "../forward"
 
-  environment       = "production"
-  destination_email = "${var.destination_email}"
+  environment       = "${local.environment}"
+  destination_email = "${aws_ssm_parameter.destination_email.value}"
+
+  providers {
+    aws     = "aws"
+    aws.acm = "aws.us_east_1"
+  }
 }
 
 output api_base_url {

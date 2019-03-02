@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# Usage:
+# source bin/assume-role
+
+unset AWS_ACCESS_KEY_ID
+unset AWS_SECRET_ACCESS_KEY
+unset AWS_SESSION_TOKEN
+
+RED='\033[0;31m'
+GRAY='\033[0;30m'
+NC='\033[0m'
+
+profile="default"
+
+identity=$(
+  aws sts get-caller-identity \
+    --output json \
+    --profile $profile
+)
+if [ $? -ne 0 ]; then
+  echo "${RED}failed to fetch identity!${NC}"
+  return
+fi
+echo "${GRAY}fetched identity${NC}"
+
+account_id=$(echo $identity | jq -r '.Account')
+role_arn="arn:aws:iam::${account_id}:role/forward-infrastructure"
+
+role=$(
+  aws sts assume-role \
+    --output json \
+    --profile $profile \
+    --role-arn $role_arn \
+    --role-session-name "forward"
+)
+if [ $? -ne 0 ]; then
+  echo "${RED}failed to assume role: ${role_arn}${NC}"
+fi
+echo "${GRAY}assumed role${NC}"
+
+credentials=$(echo $role | jq '.Credentials')
+
+export AWS_REGION="eu-west-1"
+export AWS_ACCESS_KEY_ID=$(echo $credentials | jq -r '.AccessKeyId' )
+export AWS_SECRET_ACCESS_KEY=$(echo $credentials | jq -r '.SecretAccessKey' )
+export AWS_SESSION_TOKEN=$(echo $credentials | jq -r '.SessionToken')
+
+echo "${GRAY}exported credentials${NC}"
