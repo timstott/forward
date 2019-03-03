@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Boot local dev server
 
@@ -6,7 +6,12 @@ set -euo pipefail
 
 version=$(git describe --exact-match @ 2>/dev/null || git rev-parse --short @)
 
+export DESTINATION_EMAIL="${DESTINATION_EMAIL:=hello@example.com}"
+export SOURCE_EMAIL="${SOURCE_EMAIL:=no-reply@example.com}"
+
 export GIN_MODE=debug
 
-go run -ldflags "-X github.com/timstott/forward/app.version=$version" \
+CGO_ENABLED=0 \
+  go run \
+  -ldflags "-X github.com/timstott/forward/app.version=$version" \
   local-server/main.go

@@ -7,7 +7,7 @@ jobs:
     environment:
     steps:
       - checkout
-      - run: go test ./...
+      - run: bin/test
 
 workflows:
   version: 2

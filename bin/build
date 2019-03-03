@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 set -euo pipefail
 
@@ -7,6 +7,7 @@ version=$(git describe --exact-match @ 2>/dev/null || git rev-parse --short @)
 build_output_dir='./dist'
 mkdir -p $build_output_dir
 
+CGO_ENABLED=0 \
 GOOS=linux go build \
   -o "$build_output_dir/main" \
   -ldflags "-X github.com/timstott/forward/app.version=$version" \
